@@ -1,0 +1,53 @@
+body, input {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h3 {
+  font-family: 'Paytone One', sans-serif;
+}
+
+
+.container {
+  display: flex;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.charts {
+  display: flex;
+  height: auto;
+  flex-direction: row;
+}
+
+.chart {
+  width: 100%;
+  justify-self: center;
+}
+
+
+figcaption {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.chart-caption {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#order-title {
+  font-size: 18px;
+  caption-side: top;
+  margin-top: 15px;
+}
+
+#card-options {
+  display: block;
+  height: 60px;
+  width: 80px;
+}
+
+
