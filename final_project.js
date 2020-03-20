@@ -62,6 +62,7 @@ function barChart(json, year) {
     Highcharts.chart('bar-chart', {
         chart: {
             type: 'column',
+            styledMode : false
         },
         title: {
             text: 'Number of Top Tennis Players per Country 1973-2017'
@@ -84,11 +85,13 @@ function barChart(json, year) {
         },
         series: [{
             name: 'Players ranked 1-100',
-            data: values
+            color: 'darkblue',
+            data: values,
         },
                 {
             name: 'Players Ranked 101-2000',
-            data: bot_values
+            data: bot_values,
+            color: 'silver'
 
         }]
     });
@@ -313,7 +316,8 @@ function plotADF(data){
     console.log(aces);
     Highcharts.chart('ADF', {
      chart: {
-         type: 'bar'
+         type: 'bar',
+         styledMode: false
      },
      title: {
          text: 'Proportion of Aces & Double Faults to Total Serves vs Total Match Duration'
@@ -363,10 +367,12 @@ function plotADF(data){
 
      series: [{
          name: 'Aces',
-         data: aces
+         data: aces,
+         color: '#779ecb'
      }, {
          name: 'Double Faults',
-         data: df
+         data: df,
+         color: 'silver'
      }]
  });
  }
@@ -382,7 +388,8 @@ function pointBubble(data){
     Highcharts.chart('bubble-chart', {
         chart: {
             type: 'packedbubble',
-            height: '60%'
+            height: '60%',
+            styledMode: false
         },
         title: {
             text: 'Point Breakdown of an Average Tennis Match'
@@ -418,6 +425,7 @@ function pointBubble(data){
         },
         series: [{
             name : 'On Serve',
+            color: '#ccff00',
             data : [{
                 name: 'Aces',
                 value: aces
