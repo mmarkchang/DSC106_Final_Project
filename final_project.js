@@ -1,13 +1,20 @@
 function init() {
-    pieChart();
     lineChart();
-    pieChart2();
     slider();
     top100Promise.then(function (top100) {
         barChart(top100, 1973);
         
     })
+    staminaPromise = loadJSON('gg.json');
+    pointsPromise = loadJSON('point_breakdown.json')
+    staminaPromise.then(function (data){
+        plotADF(data);
+    });
+    pointsPromise.then(function (data) {
+        pointBubble(data)
+    });
 }
+
 
 
 async function loadJSON(path) {
@@ -285,6 +292,157 @@ function lineOverlap() {
         }
     
     });
+}
+
+function plotADF(data){
+    durations = [];
+    for(v in data['aces_prop']) {
+        durations.push(v);
+    }
+    aces = [];
+    df = [];
+    for(v in data['aces_prop']) {
+        aces.push(data['aces_prop'][v])
+        df.push(-1*data['DF_prop'][v])
+    }
+    console.log(aces);
+    Highcharts.chart('ADF', {
+     chart: {
+         type: 'bar'
+     },
+     title: {
+         text: 'Proportion of Aces & Double Faults to Total Serves vs Total Match Duration'
+     },
+     xAxis: [{
+         categories: durations,
+         reversed: false,
+         labels: {
+             step: 2
+         },
+     }, { // mirror axis on right side
+         opposite: true,
+         reversed: false,
+         categories: durations,
+         linkedTo: 0,
+         labels: {
+             step: 2
+         },
+ 
+     }],
+     yAxis: {
+         title: {
+             text: null
+         },
+         labels: {
+             formatter: function () {
+                 return (Math.abs(this.value)*100).toFixed(1) + '%';
+             },
+             step: 1,
+             max: 200,
+             min: 0,
+         }
+     },
+ 
+     plotOptions: {
+         series: {
+             stacking: 'normal'
+         }
+     },
+ 
+     tooltip: {
+         formatter: function () {
+             return '<b>' + this.series.name + ', Total Duration: ' + this.point.category + ' min' + '</b><br/>' +
+                 'Ace %: ' + Highcharts.numberFormat(Math.abs(this.point.y)*100, 1) + '%';
+         }
+     },
+ 
+     series: [{
+         name: 'Aces',
+         data: aces
+     }, {
+         name: 'Double Faults',
+         data: df
+     }]
+ });
+ }
+ 
+function pointBubble(data){
+    var aces = data['aces']['1'];
+    var df = data['df']['1'];
+    var serve_and_volley = data['s&v']['1'];
+    var first_rally = data['1stS_rally']['1'];
+    var second_rally = data['2ndS_rally']['1'];
+    var ue = data['unforced_errors']['1'];
+    var osr = data['osr']['1'];
+    Highcharts.chart('bubble-chart', {
+        chart: {
+            type: 'packedbubble',
+            height: '100%'
+        },
+        title: {
+            text: 'Point Breakdown of an Average Tennis Match'
+        },
+        tooltip: {
+            useHTML: true,
+            formatter: function () {
+                console.log(this);
+                var x = this.y.toFixed(2)
+                return '<b>' + this.key + ':</b>' +' ' + x
+            }
+        },
+        plotOptions: {
+            packedbubble: {
+                minSize: '35%',
+                maxSize: '500%',
+                zMin: 0,
+                zMax: 1000,
+                layoutAlgorithm: {
+                    splitSeries: false,
+                    gravitationalConstant: 0.02
+                },
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}',
+                    style: {
+                        color: 'black',
+                        textOutline: 'none',
+                        fontWeight: 'normal'
+                    }
+                }
+            }
+        },
+        series: [{
+            name : 'On Serve',
+            data : [{
+                name: 'Aces',
+                value: aces
+            }, {
+                name: 'Serve and Volley',
+                value: serve_and_volley
+            }, {
+                name: '1st Serve Rally', 
+                value: first_rally
+            }, {
+                name: '2nd Serve Rally',
+                value: second_rally
+            }, {
+                name: 'Opp. Unforced Errors',
+                value: ue / 2
+            }]
+        }, {
+            name: 'Off Serve',
+            data : [{
+                name: 'Opp. Double Fault', 
+                value: df 
+            }, {
+                name: 'Opp. Serve Winners',
+                value: osr - (ue/2)
+            }, {
+                name: 'Opp. Unforced Errors',
+                value: ue/2,
+            }]
+        }]
+    })
 }
 
 function pieChart() {
