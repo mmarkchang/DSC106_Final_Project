@@ -1,14 +1,8 @@
 function init() {
-    barChart()
-    pieChart()
-    barChart2()
-    pieChart2()
-
-    top100Promise = loadJSON('top100_players.json');
-    top100Promise.then(function (sales) {
-		barChart(sales);
-	});
-
+    pieChart();
+    barChart2();
+    pieChart2();
+    slider();
 }
 
 
@@ -18,44 +12,74 @@ async function loadJSON(path) {
     return dataset;
 }
 
-function barChart(sales) {
+function slider () {
+    var rangeslider = document.getElementById("sliderRange"); 
+    var output = document.getElementById("demo"); 
+    output.innerHTML = rangeslider.value; 
+    top100Promise = loadJSON('players.json');
+    rangeslider.oninput = function() { 
+        output.innerHTML = this.value; 
+
+        top100Promise.then(function (top100) {
+            barChart(top100, rangeslider.value);
+            
+        })
+    } 
+ 
+}
+
+function barChart(json, year) {
+    console.log(year);
+    console.log(json);
+    var top100_val = json['top'];
+    var bottom_val = json['bot']
+
     var keys = [];
-    for(var k in sales) keys.push(k);
-    // obj = JSON.parse(JSON.stringify(sales))
-    console.log(sales);
+    for(var k in top100_val[year]) keys.push(k);
+
+    var values = [];
+    for(var key in keys) values.push(top100_val[year][keys[key]]);
 
 
+    var bot_keys = [];
+    for(var k in bottom_val[year]) bot_keys.push(k);
 
-    // Highcharts.chart('bar-chart', {
-    //     chart: {
-    //         type: 'bar',
-    //     },
-    //     title: {
-    //         text: 'Counts of Dingus and Widget per Day'
-    //     },
-    //     xAxis: {
-    //         categories: dateHistory
-    //     },
-    //     yAxis: {
-    //         min: 0,
-    //         max: 10,
-    //         title: {
-    //             text: 'Number of Dingus or Widget'
-    //         }
-    //     },
-    //     plotOptions: {
-    //         series: {
-    //             stacking: 'normal'
-    //         }
-    //     },
-    //     series: [{
-    //         name: 'Dingus',
-    //         data: dingusHistory
-    //     }, {
-    //         name: 'Widget',
-    //         data: widgetHistory
-    //     }]
-    // });
+    var bot_values = [];
+    for(var key in bot_keys) bot_values.push(bottom_val[year][bot_keys[key]]);
+
+
+    Highcharts.chart('bar-chart', {
+        chart: {
+            type: 'column',
+        },
+        title: {
+            text: 'Counts of Dingus and Widget per Day'
+        },
+        xAxis: {
+            categories: keys
+        },
+        yAxis: {
+            min: 0,
+            max: 100,
+            title: {
+                text: 'Number of Dingus or Widget'
+            }
+        },
+        // plotOptions: {
+        //     series: {
+        //         stacking: 'normal'
+        //     }
+        // },
+        series: [{
+            name: 'Dingus',
+            data: values
+        },
+                {
+            name: 'test',
+            data: bot_values
+
+        }]
+    });
 }
 
 function barChart2() {
