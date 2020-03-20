@@ -14,8 +14,8 @@
     <main>
       <div class="chart" id="bar-chart">
       </div>
-      <div class="rangeslider"> 
-        <input type="range" min="1973" max="2017" value="2017" 
+      <div class="rangeslider" id="slider"> 
+        <input type="range" min="1973" max="2017" value="1973" 
         class="myslider" id="sliderRange">
         <p>Year:  <span id="demo"></span></p>  
       </div> 
@@ -25,10 +25,13 @@
         <button class="dropbtn">Select Player</button>
         <div class="dropdown-content">
           <a class="dropdown_player" onclick="lineChart('Novak Djokovic')">Novak Djokovic</a>
+          <a class="dropdown_player" onclick="lineChart('Rafael Nadal')">Rafael Nadal</a>
+          <a class="dropdown_player" onclick="lineChart('Roger Federer')">Roger Federer</a>
           <a class="dropdown_player" onclick="lineChart('Andy Murray')">Andy Murray</a>
           <a class="dropdown_player" onclick="lineChart('Kei Nishikori')">Kei Nishikori</a>
           <a class="dropdown_player" onclick="lineChart('Alexander Zverev')">Alexander Zverev</a>
           <a class="dropdown_player" onclick="lineChart('Milos Raonic')">Milos Raonic</a>
+          <a class="dropdown_player" onclick="lineOverlap()">8 Player Overlay</a>
         </div>
       </div>
       <div class="chart" id="pie-chart">

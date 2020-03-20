@@ -18,13 +18,18 @@ h1, h3 {
   display: flex;
   height: auto;
   flex-direction: row;
+  margin-top: 15px;
 }
 
 .chart {
   width: 100%;
   justify-self: center;
+  margin-top: 15px;
 }
 
+#slider {
+  margin-left: 10px;
+}
 
 figcaption {
   font-size: 12px;
@@ -92,3 +97,6 @@ figcaption {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+text.highcharts-credits {
+  display: none;
+}
