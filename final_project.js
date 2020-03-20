@@ -57,29 +57,27 @@ function barChart(json, year) {
             type: 'column',
         },
         title: {
-            text: 'Counts of Dingus and Widget per Day'
+            text: 'Number of Top Tennis Players per Country'
         },
         xAxis: {
-            categories: keys
+            categories: keys,
+            title: {
+                text: 'Country'
+            }
         },
         yAxis: {
             min: 0,
             max: 100,
             title: {
-                text: 'Number of Dingus or Widget'
+                text: 'Number of Tennis Players'
             }
         },
-        // plotOptions: {
-        //     series: {
-        //         stacking: 'normal'
-        //     }
-        // },
         series: [{
-            name: 'Dingus',
+            name: 'Players ranked 1-100',
             data: values
         },
                 {
-            name: 'test',
+            name: 'Players Ranked 101-2000',
             data: bot_values
 
         }]
@@ -109,22 +107,25 @@ function lineChart(player) {
     Highcharts.chart('line-chart', {
 
         title: {
-            text: 'Solar Employment Growth by Sector, 2010-2016'
+            text: 'Ranking Points by Year of 2017 ATP Top 5, 1973-2017'
         },
     
         subtitle: {
-            text: 'Source: thesolarfoundation.com'
+            text: 'temp'
         },
     
         yAxis: {
             title: {
-                text: 'Number of Employees'
+                text: 'ATP Ranking Points'
             }
         },
     
         xAxis: {
             accessibility: {
                 rangeDescription: 'Range: 2010 to 2017'
+            },
+            title: {
+                text: 'Year'
             }
         },
     
@@ -144,7 +145,7 @@ function lineChart(player) {
         },
     
         series: [{
-            name: 'Installation',
+            name: player,
             data: points_dict[player]
         }],
     
