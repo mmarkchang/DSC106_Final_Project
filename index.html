@@ -13,14 +13,14 @@
   </head>
   <body onload="init()">
     <img src="/tennisball-logo.png" alt="logo" id="logo">
-    <h1 id="project-title">🎾 Mark and Eric's Project 🎾</h1>
+    <h1 id="project-title">Exploring Success on the Court</h1>
     <span style="font-size: 30px; margin-left: 40px; color: white; cursor: pointer; text-shadow: 1px 1px 5px black;" onclick="openNav()">&#9776; Navigation</span>
     <div id="side-nav">
       <a href="javascript:void(0)" class="close" onclick="closeNav()">&times;</a>
-      <a href="#bar-chart-container">Bar Chart</a>
-      <a href="#line-chart-container">Line Chart</a>
-      <a href="#adf-container">ADF</a>
-      <a href="#bubble-chart">Bubble Chart</a>
+      <a href="#bar-chart-container">Tennis Players per Country</a>
+      <a href="#line-chart-container">Top 8 Tennis Players</a>
+      <a href="#adf-container">Aces and Double Faults</a>
+      <a href="#bubble-chart">Point Breakdowns</a>
     </div>
     <main>
       <div id="bar-chart-container">
@@ -29,6 +29,15 @@
         <div class="rangeslider" id="slider">
           <input type="range" min="1973" max="2017" value="1973" class="myslider" id="sliderRange">
           <p>Year (slide to adjust): <span id="demo"></span></p>
+        </div>
+      </div>
+      
+      <div id="adf-container">
+        <div class="chart" id="ADF">
+        </div>
+      </div>
+      <div id="bubble-chart-container">
+        <div class="chart" id="bubble-chart">
         </div>
       </div>
       <div id="line-chart-container">
@@ -46,14 +55,6 @@
           </div>
       </div>
         <div class="chart" id="line-chart">
-        </div>
-      </div>
-      <div id="adf-container">
-        <div class="chart" id="ADF">
-        </div>
-      </div>
-      <div id="bubble-chart-container">
-        <div class="chart" id="bubble-chart">
         </div>
       </div>
     </main>

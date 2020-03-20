@@ -85,12 +85,14 @@ main {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5%;
+  color: 'yellow';
 }
 
 #bar-chart-container, #line-chart-container, #adf-container, #bubble-chart-container {
   border: 10px solid white;
   padding: 20px;
   margin: 40px 20px;
+  color: 'yellow';
 }
 
 .rangeslider {
@@ -177,7 +179,7 @@ figcaption {
   width: 80px;
 }
 
-/* Dropdown Button */
+
 .dropbtn {
   background-color: #4CAF50;
   color: white;
@@ -186,13 +188,12 @@ figcaption {
   border: none;
 }
 
-/* The container <div> - needed to position the dropdown content */
+
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -202,7 +203,7 @@ figcaption {
   z-index: 1;
 }
 
-/* Links inside the dropdown */
+
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -210,13 +211,10 @@ figcaption {
   display: block;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd;}
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 text.highcharts-credits {

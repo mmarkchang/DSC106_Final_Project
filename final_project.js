@@ -94,10 +94,6 @@ function barChart(json, year) {
     });
 }
 
-function updateLine() {
-
-}
-
 function lineChart(player) {
     var points_dict = {
         "Novak Djokovic" : [20, 229, 515, 1465, 4470, 5390, 10650, 8310, 14720, 13630, 13280, 13130, 16785, 16950, 11780],
@@ -122,17 +118,17 @@ function lineChart(player) {
         title: {
             text: 'Ranking Points by Year of 2017 ATP Top 8 Over the Past 15 Years'
         },
-
+    
         subtitle: {
             text: 'temp'
         },
-
+    
         yAxis: {
             title: {
                 text: 'ATP Ranking Points'
             }
         },
-
+    
         xAxis: {
             accessibility: {
                 rangeDescription: 'Range: 2010 to 2017'
@@ -141,27 +137,30 @@ function lineChart(player) {
                 text: 'Year'
             }
         },
-
+    
         legend: {
             layout: 'vertical',
             align: 'right',
             verticalAlign: 'middle'
         },
-
+    
         plotOptions: {
             series: {
                 label: {
                     connectorAllowed: false
                 },
+                color: 'yellow',
                 pointStart: 2003
             }
         },
-
+    
         series: [{
             name: player,
-            data: points_dict[player]
+            data: points_dict[player],
+            color: 'red'
         }],
 
+    
         responsive: {
             rules: [{
                 condition: {
@@ -178,12 +177,12 @@ function lineChart(player) {
         },
         tooltip: {
 			formatter: function() {
-                return rank_dict[player][this.xAxis];
+                return 'Rank: ' + String(rank_dict[player][-(2003-this.x)]) + '<br></br>' + "ATP Points: " + String(points_dict[player][-(2003-this.x)]);
 
 			}
         }
-
-
+        
+    
     });
 }
 
@@ -211,17 +210,17 @@ function lineOverlap() {
         title: {
             text: 'Ranking Points by Year of 2017 ATP Top 8 Over the Past 15 Years'
         },
-
+    
         subtitle: {
             text: 'temp'
         },
-
+    
         yAxis: {
             title: {
                 text: 'ATP Ranking Points'
             }
         },
-
+    
         xAxis: {
             accessibility: {
                 rangeDescription: 'Range: 2010 to 2017'
@@ -230,13 +229,13 @@ function lineOverlap() {
                 text: 'Year'
             }
         },
-
+    
         legend: {
             layout: 'vertical',
             align: 'right',
             verticalAlign: 'middle'
         },
-
+    
         plotOptions: {
             series: {
                 label: {
@@ -245,7 +244,6 @@ function lineOverlap() {
                 pointStart: 2003
             }
         },
-
         series: [{
                 name: 'Novak Djokovic',
                 data: points_dict['Novak Djokovic']
@@ -275,7 +273,7 @@ function lineOverlap() {
                 data: points_dict["Rafael Nadal"]
             }
         ],
-
+    
         responsive: {
             rules: [{
                 condition: {
@@ -289,8 +287,15 @@ function lineOverlap() {
                     }
                 }
             }]
-        }
+        },
+        tooltip: {
+			formatter: function() {
+                var player_name = this.series.userOptions['name'];
+                return 'Rank: ' + String(rank_dict[player_name][-(2003-this.x)]) + '<br></br>' + "ATP Points: " + String(points_dict[player_name][-(2003-this.x)]);
 
+			}
+        }
+    
     });
 }
 
@@ -377,7 +382,7 @@ function pointBubble(data){
     Highcharts.chart('bubble-chart', {
         chart: {
             type: 'packedbubble',
-            height: '100%'
+            height: '60%'
         },
         title: {
             text: 'Point Breakdown of an Average Tennis Match'
@@ -393,12 +398,12 @@ function pointBubble(data){
         plotOptions: {
             packedbubble: {
                 minSize: '35%',
-                maxSize: '500%',
+                maxSize: '300%',
                 zMin: 0,
                 zMax: 1000,
                 layoutAlgorithm: {
                     splitSeries: false,
-                    gravitationalConstant: 0.02
+                    gravitationalConstant: 0.04
                 },
                 dataLabels: {
                     enabled: true,
@@ -443,54 +448,6 @@ function pointBubble(data){
             }]
         }]
     })
-}
-
-function pieChart() {
-	var dingus = 2;
-	var widget = 4;
-
-    Highcharts.chart('pie-chart', {
-        chart: {
-            type: 'pie'
-        },
-        title: {
-            text: 'Total Dingus vs. Widget'
-        },
-        series: [{
-            data: [{
-                name: 'Dingus',
-                y: dingus
-            },
-            {
-                name: 'Widget',
-                y: widget
-            }]
-        }]
-	});
-}
-
-function pieChart2() {
-	var dingus = 2;
-	var widget = 4;
-
-    Highcharts.chart('pie-chart2', {
-        chart: {
-            type: 'pie'
-        },
-        title: {
-            text: 'Total Dingus vs. Widget'
-        },
-        series: [{
-            data: [{
-                name: 'Dingus',
-                y: dingus
-            },
-            {
-                name: 'Widget',
-                y: widget
-            }]
-        }]
-	});
 }
 
 function openNav() {
