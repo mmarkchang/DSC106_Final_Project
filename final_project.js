@@ -178,7 +178,7 @@ function lineChart(player) {
         },
         tooltip: {
 			formatter: function() {
-                return rank_dict[player][this.xAxis];
+                return 'Rank: ' + String(rank_dict[player][-(2003-this.x)]) + '<br></br>' + "ATP Points: " + String(points_dict[player][-(2003-this.x)]);
 
 			}
         }
@@ -289,6 +289,13 @@ function lineOverlap() {
                     }
                 }
             }]
+        },
+        tooltip: {
+			formatter: function() {
+                var player_name = this.series.userOptions['name'];
+                return 'Rank: ' + String(rank_dict[player_name][-(2003-this.x)]) + '<br></br>' + "ATP Points: " + String(points_dict[player_name][-(2003-this.x)]);
+
+			}
         }
     
     });
