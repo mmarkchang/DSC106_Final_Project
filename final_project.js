@@ -3,7 +3,7 @@ function init() {
     slider();
     top100Promise.then(function (top100) {
         barChart(top100, 1973);
-        
+
     })
     staminaPromise = loadJSON('gg.json');
     pointsPromise = loadJSON('point_breakdown.json')
@@ -24,19 +24,19 @@ async function loadJSON(path) {
 }
 
 function slider () {
-    var rangeslider = document.getElementById("sliderRange"); 
-    var output = document.getElementById("demo"); 
-    output.innerHTML = rangeslider.value; 
+    var rangeslider = document.getElementById("sliderRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = rangeslider.value;
     top100Promise = loadJSON('players.json');
-    rangeslider.oninput = function() { 
-        output.innerHTML = this.value; 
+    rangeslider.oninput = function() {
+        output.innerHTML = this.value;
 
         top100Promise.then(function (top100) {
             barChart(top100, rangeslider.value);
-            
+
         })
-    } 
- 
+    }
+
 }
 
 function barChart(json, year) {
@@ -122,17 +122,17 @@ function lineChart(player) {
         title: {
             text: 'Ranking Points by Year of 2017 ATP Top 8 Over the Past 15 Years'
         },
-    
+
         subtitle: {
             text: 'temp'
         },
-    
+
         yAxis: {
             title: {
                 text: 'ATP Ranking Points'
             }
         },
-    
+
         xAxis: {
             accessibility: {
                 rangeDescription: 'Range: 2010 to 2017'
@@ -141,13 +141,13 @@ function lineChart(player) {
                 text: 'Year'
             }
         },
-    
+
         legend: {
             layout: 'vertical',
             align: 'right',
             verticalAlign: 'middle'
         },
-    
+
         plotOptions: {
             series: {
                 label: {
@@ -156,12 +156,12 @@ function lineChart(player) {
                 pointStart: 2003
             }
         },
-    
+
         series: [{
             name: player,
             data: points_dict[player]
         }],
-    
+
         responsive: {
             rules: [{
                 condition: {
@@ -178,12 +178,12 @@ function lineChart(player) {
         },
         tooltip: {
 			formatter: function() {
-                return 'Rank: ' + String(rank_dict[player][-(2003-this.x)]) + '<br></br>' + "ATP Points: " + String(points_dict[player][-(2003-this.x)]);
+                return rank_dict[player][this.xAxis];
 
 			}
         }
-        
-    
+
+
     });
 }
 
@@ -211,17 +211,17 @@ function lineOverlap() {
         title: {
             text: 'Ranking Points by Year of 2017 ATP Top 8 Over the Past 15 Years'
         },
-    
+
         subtitle: {
             text: 'temp'
         },
-    
+
         yAxis: {
             title: {
                 text: 'ATP Ranking Points'
             }
         },
-    
+
         xAxis: {
             accessibility: {
                 rangeDescription: 'Range: 2010 to 2017'
@@ -230,13 +230,13 @@ function lineOverlap() {
                 text: 'Year'
             }
         },
-    
+
         legend: {
             layout: 'vertical',
             align: 'right',
             verticalAlign: 'middle'
         },
-    
+
         plotOptions: {
             series: {
                 label: {
@@ -245,7 +245,7 @@ function lineOverlap() {
                 pointStart: 2003
             }
         },
-    
+
         series: [{
                 name: 'Novak Djokovic',
                 data: points_dict['Novak Djokovic']
@@ -275,7 +275,7 @@ function lineOverlap() {
                 data: points_dict["Rafael Nadal"]
             }
         ],
-    
+
         responsive: {
             rules: [{
                 condition: {
@@ -289,15 +289,8 @@ function lineOverlap() {
                     }
                 }
             }]
-        },
-        tooltip: {
-			formatter: function() {
-                var player_name = this.series.userOptions['name'];
-                return 'Rank: ' + String(rank_dict[player_name][-(2003-this.x)]) + '<br></br>' + "ATP Points: " + String(points_dict[player_name][-(2003-this.x)]);
-
-			}
         }
-    
+
     });
 }
 
@@ -334,7 +327,7 @@ function plotADF(data){
          labels: {
              step: 2
          },
- 
+
      }],
      yAxis: {
          title: {
@@ -349,20 +342,20 @@ function plotADF(data){
              min: 0,
          }
      },
- 
+
      plotOptions: {
          series: {
              stacking: 'normal'
          }
      },
- 
+
      tooltip: {
          formatter: function () {
              return '<b>' + this.series.name + ', Total Duration: ' + this.point.category + ' min' + '</b><br/>' +
                  'Ace %: ' + Highcharts.numberFormat(Math.abs(this.point.y)*100, 1) + '%';
          }
      },
- 
+
      series: [{
          name: 'Aces',
          data: aces
@@ -372,7 +365,7 @@ function plotADF(data){
      }]
  });
  }
- 
+
 function pointBubble(data){
     var aces = data['aces']['1'];
     var df = data['df']['1'];
@@ -427,7 +420,7 @@ function pointBubble(data){
                 name: 'Serve and Volley',
                 value: serve_and_volley
             }, {
-                name: '1st Serve Rally', 
+                name: '1st Serve Rally',
                 value: first_rally
             }, {
                 name: '2nd Serve Rally',
@@ -439,8 +432,8 @@ function pointBubble(data){
         }, {
             name: 'Off Serve',
             data : [{
-                name: 'Opp. Double Fault', 
-                value: df 
+                name: 'Opp. Double Fault',
+                value: df
             }, {
                 name: 'Opp. Serve Winners',
                 value: osr - (ue/2)
@@ -455,7 +448,7 @@ function pointBubble(data){
 function pieChart() {
 	var dingus = 2;
 	var widget = 4;
-    
+
     Highcharts.chart('pie-chart', {
         chart: {
             type: 'pie'
@@ -479,7 +472,7 @@ function pieChart() {
 function pieChart2() {
 	var dingus = 2;
 	var widget = 4;
-    
+
     Highcharts.chart('pie-chart2', {
         chart: {
             type: 'pie'
@@ -498,4 +491,12 @@ function pieChart2() {
             }]
         }]
 	});
+}
+
+function openNav() {
+    document.getElementById('side-nav').style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById('side-nav').style.width = "0";
 }
